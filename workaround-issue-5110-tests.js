@@ -65,10 +65,16 @@ if (Meteor.isClient) {
       var loginFailureStopper;
       var div;
       WorkaroundIssue5110.addIgnoredMessage("message to ignore");
-      Meteor.call('removeUser', 'testuser5110@example.com', function (error) {
-        test.isUndefined(error, 'Unexpected error in removeUser');
-        addAttemptCallback();
+      Meteor.logout(function (error) {
+        test.isUndefined(error, 'Unexpected error during logout');
+        removeUser();
       });
+      function removeUser() {
+        Meteor.call('removeUser', 'testuser5110@example.com', function (error) {
+          test.isUndefined(error, 'Unexpected error in removeUser');
+          addAttemptCallback();
+        });        
+      }
       function addAttemptCallback() {
         Meteor.call('addAttemptCallback',
           "message to ignore",

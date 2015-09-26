@@ -2,7 +2,7 @@
 
 Package.describe({
   name: 'brettle:workaround-issue-5110',
-  version: '0.0.1',
+  version: '0.0.2',
   summary:
     'Workaround Meteor issue 5110 by making account-ui-unstyled ignore some ' +
     'error messages.',
@@ -23,6 +23,8 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('test-helpers');
+  api.use('templating');
+  api.use('tracker');
   api.use('accounts-base');
   api.use('accounts-password');
   api.use('accounts-ui');
